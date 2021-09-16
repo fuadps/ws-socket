@@ -1,7 +1,11 @@
+var fs = require('fs')
+const Redis = require("ioredis");
 const express = require('express');
+const https = require('https');
+
 const app = express();
-const http = require('http');
-const server = http.createServer(app);
+
+const server = https.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
     cors: {
@@ -10,7 +14,6 @@ const io = new Server(server, {
     }
 });
 
-const Redis = require("ioredis");
 const redis = new Redis();
 
 redis.subscribe('chat-channel')
